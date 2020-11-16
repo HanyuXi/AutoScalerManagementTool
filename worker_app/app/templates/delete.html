@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Deletion</title>
+		<link rel="stylesheet" href="../static/css/bootstrap.min.css">
+	</head>
+	<body>
+        <form name="user_delete" action="/delete" method="POST">
+          <label for="UserRemove">Choose user to delete</label>
+            <select name="username">
+              {% for user in list_of_users %}
+                <option value="{{ user }}" SELECTED>{{ user }}</option>
+              {% endfor %}     
+            </select>
+            <input type="submit" value="Delete">
+        </form>
+        <div class="msg">{{ msg }}</div>
+        <li><a href="{{ url_for('home')}}"> Back to Home Page</a>
+      </body>
+</html>

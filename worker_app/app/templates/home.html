@@ -1,0 +1,30 @@
+<!doctype html>
+<title>{% block title %}{% endblock %} - Flask Password Reset</title>
+<nav>
+  <h1>Assignment 1</h1>
+  <p> username: {{ payload.username }}</p>
+  <p> is_admin: {{ payload.is_admin }}</p>
+  {% if is_admin %}
+  <ul>
+      <li><a href="{{ url_for('upload_interface') }}">Upload Picture</a>
+      <li><a href="{{ url_for('history_images')}}"> History</a>
+      <li><a href="{{ url_for('register')}}"> Create User</a>
+      <li><a href="{{ url_for('delete')}}"> Delete User</a>
+      <li><a href="{{ url_for('change_password')}}"> Change Password</a>
+      <li><a href="{{ url_for('logout')}}"> Log Out</a>
+  </ul>
+  {% else %}
+  <ul>
+    <li><a href="{{ url_for('upload_interface') }}">Upload Picture</a>
+    <li><a href="{{ url_for('history_images')}}"> History</a>
+    <li><a href="{{ url_for('change_password')}}"> Change Password</a>
+    <li><a href="{{ url_for('logout')}}"> Log Out</a>
+  </ul>
+  {% endif %}
+</nav>
+<section class="content">
+  <header>
+    {% block header %}{% endblock %}
+  </header>
+  {% block content %}{% endblock %}
+</section>

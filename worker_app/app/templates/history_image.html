@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>History</title>
+</head>
+<body>
+    <p>No Masks</p>
+    <ul id="nomasks">
+        {% for image in nomasks %}
+        <img src="{{ image }}" alt="ProcessedImage">
+        {% endfor %}
+    </ul>
+    <p>All Masks</p>
+    <ul id="allmasks">
+        {% for image in allmasks %}
+        <img src="{{ image }}" alt="ProcessedImage">
+        {% endfor %}
+    </ul>
+    <p>Some Masks</p>
+    <ul id="somemasks">
+        {% for image in somemasks %}
+        <img src="{{ image }}" alt="ProcessedImage">
+        {% endfor %}
+    </ul>
+    <p>No Face</p>
+    <ul id="noface">
+        {% for image in noface%}
+        <img src="{{ image }}" alt="ProcessedImage">
+        {% endfor %}
+    </ul>
+    <li><a href="{{ url_for('home')}}"> Back to Home Page</a>
+</body>
+</html>

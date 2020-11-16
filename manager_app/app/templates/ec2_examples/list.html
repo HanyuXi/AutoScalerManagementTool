@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+    <p> The number of workers for the past 30 minutes: {{ last_30 }}</p>
+    <form action="{{url_for('ec2_create')}}" method="post">
+        <input type="submit" value="Increase Worker">
+    </form>
+
+    <form action="{{url_for('decrease_worker')}}" method="post">
+        <input type="submit" value="Decrease Worker">
+    </form>
+    
+    <form action="{{url_for('terminating_all')}}" method="post">
+        <input type="submit" value="Terminating All Workers">
+    </form>
+
+    <form action="{{url_for('erase_data')}}" method="post">
+        <input type="submit" value="Erase S3 and RBS data">
+    </form>
+
+
+    <form action="{{url_for('ec2_list')}}" method="post">
+        <input type="submit" value="Filter">
+        <select name="filter">
+            <option value="all">All</option>
+            <option value="pending">Pending</option>
+            <option value="running">Running</option>
+            <option value="shutting-down">Shutting-down</option>
+            <option value="stopped">Stopped</option>
+            <option value="stopping">Stopping</option>
+            <option value="terminated">Terminated</option>
+        </select>
+    </form>
+
+    <table >
+    <thead>
+       <th>ID</th>
+       <th>Type</th>
+       <th>Availability Zone</th>
+       <th>Status</th>
+       <th>State</th>
+    </thead> 
+    {% for instance in instances %}
+        <tr>
+            <td>{{ instance["id"] }}</td>
+            <td>{{ instance["instance_type"] }}</td>
+            <td>{{ instance["az"]}}</td>
+            <td>{{ instance["state"] }}</td>
+            <td>{{ instance["status"] }}</td>
+            <td>
+                <form action="{{url_for('ec2_view',id=instance.id)}}" method='get'>
+                    <input type='submit' value='Details' />
+                </form>
+            </td>
+         
+            <td>
+                <form action="{{url_for('ec2_destroy',id=instance.id)}}" method='post' onsubmit='return confirm("Are you sure?")'>
+                    <input type='submit' value='Destroy' />
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}

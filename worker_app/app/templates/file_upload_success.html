@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Processed Result</title>
+</head>
+<body>
+    <img src="{{ new_image }}" alt="ProcessedImage">
+    <p>nums of faces: {{payload.num_faces}} </p>
+    <p>nums of unmasks: {{payload.num_unmasked}} </p>
+    <p>nums of masks: {{payload.num_masked}} </p>
+    <li><a href="{{ url_for('home')}}"> Back to Home Page</a>
+</body>
+</html>

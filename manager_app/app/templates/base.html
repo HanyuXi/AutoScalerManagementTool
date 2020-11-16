@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript" src="{{ url_for('static', filename='flot/jquery.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='flot/jquery.flot.js') }}"></script>
+        <title>{{title}}</title>
+
+    </head>
+    <body>
+        <h1>{{title}}</h2>
+            <p><a href="http://test22-650040785.us-east-1.elb.amazonaws.com:5000/">Load Balanced Entry URL</a></p>
+        {% block content %}
+        {% endblock %}
+    </body>
+</html>
