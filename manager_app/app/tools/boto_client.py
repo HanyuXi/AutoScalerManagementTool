@@ -1,20 +1,37 @@
 from flask import render_template, redirect, url_for, request
 from app import webapp
-import time
+import time, os
 import boto3
 from ..tools import config
 from datetime import datetime, timedelta, date
 from operator import itemgetter
 
+
+
+#import requests
+#r = requests.get('http://169.254.169.254/latest/meta-data/iam/security-credentials/assignment2S3')
+#json_obj = r.json()
+#print(json_obj)
+#TOKEN = json_obj["Token"]
+#AccessKeyId = json_obj["AccessKeyId"]
+#SecretAccessKey=json_obj["SecretAccessKey"]
+
+
 class Client:
     def __init__(self):
+        #self.session = boto3.Session(region_name = 'us-east-1', aws_access_key_id= AccessKeyId, aws_secret_access_key=SecretAccessKey, aws_session_token=TOKEN)
+        #self.ec2 = self.session.resource('ec2')
+        #self.ec2_client = boto3.client('ec2', aws_access_key_id= AccessKeyId, aws_secret_access_key=SecretAccessKey, aws_session_token=TOKEN)
+        #self.s3 = boto3.client('s3', aws_access_key_id= AccessKeyId, aws_secret_access_key=SecretAccessKey, aws_session_token=TOKEN)
+        #self.cloudwatch_client = boto3.client('cloudwatch', aws_access_key_id= AccessKeyId, aws_secret_access_key=SecretAccessKey, aws_session_token=TOKEN)
+        #load balancer
+        #self.elb = boto3.client('elbv2', aws_access_key_id= AccessKeyId, aws_secret_access_key=SecretAccessKey, aws_session_token=TOKEN)
         self.ec2 = boto3.resource('ec2')
         self.ec2_client = boto3.client('ec2')
         self.s3 = boto3.client('s3')
         self.cloudwatch_client = boto3.client('cloudwatch')
         #load balancer
         self.elb = boto3.client('elbv2')
-    
     def list_workers(self, status):
         if status == "" or status == "all":
             instances = self.ec2.instances.all()
@@ -34,8 +51,7 @@ class Client:
         print(instance_Id)
         while (instance.state['Name'] != "running"):
             time.sleep(1)
-            ec2 = boto3.resource('ec2')
-            instance = ec2.Instance(instance_Id)
+            instance = self.ec2.Instance(instance_Id)
             instance_Id = instance.id
             
         print(instance_Id)

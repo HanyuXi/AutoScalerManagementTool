@@ -43,7 +43,8 @@ def decrease_worker():
 @webapp.route('/ec2_examples/<id>',methods=['GET'])
 #Display details about a specific instance.
 def ec2_view(id):
-    ec2 = boto3.resource('ec2')
+    #ec2 = boto3.resource('ec2')
+    ec2 = aws_client.ec2    
     instance = ec2.Instance(id)
     cpu_stats = aws_client.fetch_cpu(id)
     cpu_stats = sorted(cpu_stats, key=itemgetter(0))
