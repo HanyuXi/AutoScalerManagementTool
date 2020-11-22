@@ -8,8 +8,10 @@ monitoring_status = True
 instance_type = 't2.small'
 user_data = """#cloud-config
 runcmd:
-- cd /home/ubuntu/Desktop/Assignment1/MaskImageDetectionWebApp 
+- cd /home/ubuntu/Desktop/Assignment1/MaskImageDetectionWebApp
+- cp -r /home/ubuntu/Desktop/Assignment1/MaskImageDetectionWebApp/* ~ 
 - . config/ProjectEnv.sh
+- cd ~
 - python3 -m pip install torch torchvision
 - python3 -m pip install opencv-python
 - python3 -m pip install -r requirement.txt
