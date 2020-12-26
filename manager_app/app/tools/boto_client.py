@@ -7,7 +7,7 @@ from datetime import datetime, timedelta, date
 from operator import itemgetter
 
 
-
+###############Running in the instance############
 #import requests
 #r = requests.get('http://169.254.169.254/latest/meta-data/iam/security-credentials/assignment2S3')
 #json_obj = r.json()
@@ -15,8 +15,6 @@ from operator import itemgetter
 #TOKEN = json_obj["Token"]
 #AccessKeyId = json_obj["AccessKeyId"]
 #SecretAccessKey=json_obj["SecretAccessKey"]
-
-
 class Client:
     def __init__(self):
         #self.session = boto3.Session(region_name = 'us-east-1', aws_access_key_id= AccessKeyId, aws_secret_access_key=SecretAccessKey, aws_session_token=TOKEN)
@@ -26,6 +24,7 @@ class Client:
         #self.cloudwatch_client = boto3.client('cloudwatch', aws_access_key_id= AccessKeyId, aws_secret_access_key=SecretAccessKey, aws_session_token=TOKEN)
         #load balancer
         #self.elb = boto3.client('elbv2', aws_access_key_id= AccessKeyId, aws_secret_access_key=SecretAccessKey, aws_session_token=TOKEN)
+        ###############Running locally############
         self.ec2 = boto3.resource('ec2')
         self.ec2_client = boto3.client('ec2')
         self.s3 = boto3.client('s3')
@@ -81,14 +80,11 @@ class Client:
         try:
             # Here 'ubuntu' is user name and 'instance_ip' is public IP of EC2
             client.connect(hostname=instance_ip, username="ubuntu", pkey=key)
-
             # Execute a command(cmd) after connecting/ssh to an instance
             stdin, stdout, stderr = client.exec_command(cmd)
             print(stdout.read())
-
             # close the client connection once the job is done
             client.close()
-
         except Exception as e:
             print(e)
     
