@@ -10,7 +10,7 @@ then
     echo "Manager App started successfully"
 else
     echo "Something is wrong with the running manager app"
-
+ 
 python3 auto_scaler.py &> auto_scaler.log &
 if [ $? == 0 ]
 then
