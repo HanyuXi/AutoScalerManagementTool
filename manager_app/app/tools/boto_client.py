@@ -54,8 +54,6 @@ class Client:
             instance_Id = instance.id
 
         instance_ip = instance.public_ip_address
-        print("instance ip address")
-        print(instance_ip)
         self.elb.register_targets(
             TargetGroupArn=config.target_group_arn,
             Targets=[{'Id': instance_Id, 'Port': 5000}])
@@ -87,6 +85,7 @@ class Client:
             client.close()
         except Exception as e:
             print(e)
+        return
     
     ### Fetch the status of each instance: healthy, draining, unused, ...
     def describe_all_instances(self):

@@ -14,7 +14,7 @@ else
 python3 auto_scaler.py &> auto_scaler.log &
 if [ $? == 0 ]
 then
-    echo "Manager App started successfully"
+    echo "AutoScaler App started successfully"
 else
-    echo "Something is wrong with the running manager app"
+    echo "Something is wrong with the running AutoScaler app"
     

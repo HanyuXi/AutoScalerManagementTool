@@ -33,3 +33,4 @@ TagSpecifications= [
       ]
     }]
 IamInstanceProfile={'Name': 'assignment2S3'}
+cpu_threshold = 0
